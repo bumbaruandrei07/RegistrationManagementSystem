@@ -58,12 +58,17 @@ public class GuestList {
         return false;
     }
 
-
-
-
-
-
-
+    public Guest updateHelper(String s1, String s2, String s3, String s4) {
+        for (int i = 0; i < participantsList.size(); i++) {
+            if ((participantsList.get(i).getFirstName().equalsIgnoreCase(s1)) &&
+                    (participantsList.get(i).getLastName().equalsIgnoreCase(s2)) ||
+                    (participantsList.get(i).getEmail().equalsIgnoreCase(s3)) ||
+                    (participantsList.get(i).getPhoneNumber().equalsIgnoreCase(s4))) {
+                return participantsList.get(i);
+            }
+        }
+        return null;
+    }
 
 
 //    public boolean removeP(Guest guest){
@@ -133,7 +138,14 @@ public class GuestList {
                 return true;
             }
         }
-        System.out.println("Persoana este in lista de asteptare!");
+            for(int i = 0; i<waitingList.size(); i++){
+            if ((waitingList.get(i).getFirstName().equalsIgnoreCase(str1)) &&
+                    waitingList.get(i).getLastName().equalsIgnoreCase(str2)){
+                System.out.println("Persoana este in lista de asteptare");
+                return true;
+            }
+        }
+        System.out.println("Persoana nu se afla pe nicio lista!");
         return false;
     }
 
@@ -146,7 +158,7 @@ public class GuestList {
                 }
             }
         }
-        System.out.println("Persoana este in lista de asteptare!");
+        System.out.println("Persoana nu se afla pe nicio lista!");
         return false;
     }
 
