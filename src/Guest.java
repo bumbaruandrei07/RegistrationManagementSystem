@@ -1,5 +1,3 @@
-import java.util.Locale;
-
 public class Guest {
 
     private String lastName;
@@ -11,7 +9,7 @@ public class Guest {
         this("", "", "", "");
     }
 
-    public Guest(String email){
+    public Guest(String email) {
         this.email = email;
     }
 
@@ -54,25 +52,30 @@ public class Guest {
         return false;
     }
 
-    public void updateGuest(String updatedGuest, int option) {
+    public Guest updateGuest(Guest guest, int option, String updatedFirstName, String updatedLastName, String newEmail, String newPhoneNumber) {
         switch (option) {
             case 1:
-                this.lastName = updatedGuest;
-                System.out.println("Last name updated");
+                this.firstName = updatedFirstName;
+                System.out.println("First name updated: " + getFirstName());
                 break;
+
             case 2:
-                this.firstName = updatedGuest;
-                System.out.println("First name updated");
+                this.lastName = updatedLastName;
+                System.out.println("Last name updated: " + getLastName());
                 break;
+
             case 3:
-                this.email = updatedGuest;
+                this.email = newEmail;
                 System.out.println("Email updated");
                 break;
+
             case 4:
-                this.phoneNumber = updatedGuest;
+                this.phoneNumber = newPhoneNumber;
                 System.out.println("Phone number updated");
                 break;
         }
+        System.out.println(guest);
+        return guest;
     }
 
 
@@ -90,6 +93,7 @@ public class Guest {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        System.out.println(firstName);
     }
 
     public String getEmail() {
@@ -110,11 +114,9 @@ public class Guest {
 
     @Override
     public String toString() {
-        return "Last Name: " + lastName + " | " +
-                "First Name: " + firstName + " | " +
+        return "First Name: " + firstName + " | " +
+                "Last Name: " + lastName + " | " +
                 "Email: " + email + " | " +
                 "Phone number: " + phoneNumber;
     }
-
-
 }

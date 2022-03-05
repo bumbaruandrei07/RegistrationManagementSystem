@@ -43,20 +43,57 @@ public class GuestList {
                 participantsList.add(waitingList.get(0));
                 waitingList.remove(0);
             }
-            System.out.println("Person " + guest.getFirstName() + " " + guest.getLastName() + guest.getEmail() + guest.getPhoneNumber() + " has been successfully removed");
+            System.out.println("Person has been successfully removed");
             return true;
         }
 
         for (int i = 0; i < waitingList.size(); i++) {
             if (guest.equals(waitingList.get(i))) {
                 waitingList.remove(i);
-                System.out.println("Person " + guest.getFirstName() + " " + guest.getLastName() + guest.getEmail() + guest.getPhoneNumber() + " has been successfully removed");
+                System.out.println("Person has been successfully removed");
                 return true;
             }
         }
         System.out.println("ERROR : this guest is not registered!");
         return false;
     }
+
+
+
+
+
+
+
+
+
+//    public boolean removeP(Guest guest){
+//        for(Guest guests : participantsList){
+//            if(guest.equals(guests)){
+//                participantsList.remove(guest);
+//            }
+//            if (waitingList.size() != 0) {
+//                //add 1st person on waiting list to participants list
+//                participantsList.add(waitingList.get(0));
+//                waitingList.remove(0);
+//            }
+//
+//            System.out.println("Person has been successfully removed");
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    public boolean removeW(Guest guest){
+//        for(Guest guests : waitingList){
+//            if(guest.equals(guests)){
+//               waitingList.remove(guest);
+//            }
+//            System.out.println("Person has been successfully removed");
+//            return true;
+//        }
+//        return false;
+//    }
+
 
     public boolean isRegistered(Guest guest) {
         if (waitingList.size() == 0) {
@@ -92,13 +129,11 @@ public class GuestList {
                     (participantsList.get(i).getLastName().equalsIgnoreCase(str2))) {
                 if (i < this.availablePlaces) {
                     System.out.println("Persoana este in lista de participanti!");
-                } else {
-                    System.out.println("Persoana este in lista de asteptare!");
                 }
                 return true;
             }
         }
-        System.out.println("Persona nu este inscrisa pe nicio lista!");
+        System.out.println("Persoana este in lista de asteptare!");
         return false;
     }
 
@@ -107,29 +142,26 @@ public class GuestList {
             if (participantsList.get(i).getEmail().equalsIgnoreCase(str)) {
                 if (i < this.availablePlaces) {
                     System.out.println("Persoana este in lista de participanti!");
-                } else {
-                    System.out.println("Persoana este in lista de asteptare!");
+                    return true;
                 }
-                return true;
             }
         }
-        System.out.println("Persona nu este inscrisa pe nicio lista!");
+        System.out.println("Persoana este in lista de asteptare!");
         return false;
     }
 
 
+    // another way to check -> but if you have 2 obj with the same fields it won't return both objs, just the first !
     public boolean checkPhoneNumber(String str) {
         for (int i = 0; i < participantsList.size(); i++) {
             if (participantsList.get(i).getPhoneNumber().equalsIgnoreCase(str)) {
                 if (i < this.availablePlaces) {
                     System.out.println("Persoana este in lista de participanti!");
-                } else {
-                    System.out.println("Persoana este in lista de asteptare!");
                 }
                 return true;
             }
         }
-        System.out.println("Persona nu este inscrisa pe nicio lista!");
+        System.out.println("Persoana este in lista de asteptare!");
         return false;
     }
 
@@ -141,8 +173,6 @@ public class GuestList {
         if (participantsList.size() == 0) {
             System.out.println("The list of participants is empty now...");
         }
-
-        System.out.println(participantsList);
         return participantsList;
     }
 
@@ -150,7 +180,6 @@ public class GuestList {
         if (waitingList.size() == 0) {
             System.out.println("The waiting list is empty now...");
         }
-        System.out.println(waitingList);
         return waitingList;
     }
 
@@ -172,20 +201,52 @@ public class GuestList {
         return participantsList.size() + waitingList.size();
     }
 
-    //searching method
-    public Guest findGuest(Guest guest) {
-        for (Guest currentGuest : participantsList) {
-            if (currentGuest.equals(guest)) {
-                return currentGuest;
+    // searching method
+
+
+//    public Guest findGuest(Guest guest) {
+//
+//            for (Guest currentGuest1 : participantsList) {
+//                if (currentGuest1.equals(guest)) {
+//                    System.out.println(currentGuest1);
+//
+//                }
+//                return currentGuest1;
+//            }
+//
+//            for (Guest currentGuest : waitingList) {
+//                if (currentGuest.equals(guest)) {
+//                    System.out.println(currentGuest);
+//                }
+//                return currentGuest;
+//            }
+//
+//        return null;
+//    }
+
+
+    public Guest findGuestInParticipantsList(Guest guest) {
+        for (Guest currentGuest1 : participantsList) {
+            if (currentGuest1.equals(guest)) {
+//                System.out.println(currentGuest1);
+                return currentGuest1;
             }
-        }
-        for (Guest currentGuest : waitingList) {
-            if (currentGuest.equals(guest)) {
-                return currentGuest;
-            }
+
         }
         return null;
     }
+
+    public Guest findGuestInWaitingList(Guest guest) {
+        for (Guest currentGuest : waitingList) {
+            if (currentGuest.equals(guest)) {
+//                System.out.println(currentGuest);
+                return currentGuest;
+            }
+
+        }
+        return null;
+    }
+
 
     //partial searching method
 
