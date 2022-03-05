@@ -1,12 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
 
     private static final Scanner sc = new Scanner(System.in);
+    private static final GuestList guestList = new GuestList(1);
+
 
     private static String newCommand() {
-        System.out.println("\n Enter a new command:  ");
+        System.out.println("\nEnter a new command:  ");
         return sc.next();
     }
 
@@ -26,22 +29,129 @@ public class Main {
         System.out.println("quit         - Inchide aplicatia");
     }
 
-    public static void main(String[] args) {
-        System.out.println("Welcome to the new Registration Management System :) ");
-        String chosedOption = newCommand();
-        boolean appIsOn = true;
 
-        while (appIsOn) {
+    public static void addGuest() {
+        System.out.println("First name: ");
+        String firstName = sc.next();
+        System.out.println("Last name: ");
+        String lastName = sc.next();
+        System.out.println("E-mail: ");
+        String email = sc.next();
+        System.out.println("Phone number: ");
+        String phoneNumber = sc.next();
+        Guest guest = new Guest(firstName, lastName, email, phoneNumber);
+        System.out.println("New guest:\n" + guest);
+        guestList.addParticipant(guest);
+    }
+
+    private static void guests() {
+        System.out.println("Lista de persoane care participa la eveniment: ");
+        System.out.println(guestList.getParticipantsList());
+    }
+
+    private static void waitList() {
+        System.out.println("Persoanele din lista de asteptare: ");
+        System.out.println(guestList.getWaitingList());
+    }
+
+    private static void available() {
+        System.out.println("Numarul de locuri libere: ");
+        System.out.println(guestList.getRemainingPlaces());
+    }
+
+    private static void guests_no() {
+        System.out.println("Numarul de persoane care participa la eveniment: ");
+        System.out.println(guestList.getParticipantsListNumber());
+    }
+
+    private static void waitlist_no() {
+        System.out.println("Numarul de persoane din lista de asteptare: ");
+        System.out.println(guestList.getWaitingListNumberOfParticipants());
+    }
+
+    private static void subscribe_no() {
+        System.out.println("Numarul total de persoane inscrise: ");
+        System.out.println(guestList.getTotalNumberOfParticipantsOnLists());
+
+    }
+
+    private static void search() {
+        String subSequence;
+        System.out.println("Cauta toti invitatii conform sirului de caractere introdus: ");
+        subSequence = sc.next();
+        guestList.partialSearch(subSequence);
+    }
+
+
+    public static void remove() {
+        String options, s1, s2;
+        System.out.println("S-a ales optiunea de stergere a unui participant.");
+        System.out.println("Introduceti una dintre optiunile : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
+        options = sc.nextLine();
+        switch (options) {
+            case "A":
+                System.out.println("First Name: ");
+                s1 = sc.nextLine();
+                System.out.println("Last Name: ");
+                s2 = sc.nextLine();
+                Guest guest = new Guest(s1, s2);
+                if (!guestList.checkName(s1, s2)) {
+                    System.out.println("Nu exista participantul cautat");
+                    break;
+                }
+                guestList.remove(guest);
+                break;
+
+            case "B":
+                System.out.println("Introduceti e-mailul: ");
+                s1 = sc.nextLine();
+                Guest guest1 = new Guest(s1);
+                if (!guestList.checkEmail(s1)) {
+                    System.out.println("Nu exista participantul cautat!");
+                    break;
+                }
+                guestList.remove(guest1);
+                break;
+            case "C":
+                System.out.println("Introduceti numarul de telefon: ");
+                s1 = sc.nextLine();
+                Guest guest2 = new Guest(s1);
+                if (!guestList.checkPhoneNumber(s1)) {
+                    System.out.println("Nu exista participantul!");
+                    break;
+                }
+                guestList.remove(guest2);
+                break;
+
+            default:
+                System.out.println("Comanda introdusa este invalida!");
+                break;
+
+
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        ArrayList<Guest> guests = new ArrayList<Guest>();
+        guests.add(new Guest("Andrei", "Bumbaru", "bumbaru.andrei@gmail.com", "0763411231"));
+        guests.add(new Guest("Robert", "Nita", "robert.nita@gmail.com", "0733211121"));
+
+        System.out.println("Welcome to the new Registration Management System! ");
+        String chosedOption = newCommand();
+
+
+        while (!chosedOption.equals("quit")) {
+
             switch (chosedOption) {
                 case "help":
                     displayCommandsOptions();
-
                     break;
 
                 case "add":
                     System.out.println("Adauga o noua persoana (inscriere): ");
-
-
+                    addGuest();
                     break;
 
                 case "check":
@@ -51,72 +161,50 @@ public class Main {
                     break;
 
                 case "remove":
-                    System.out.println("Sterge o persoana existenta din lista: ");
-
-
+                    remove();
                     break;
 
                 case "update":
                     System.out.println("Actualizeaza detaliile unei persoane: ");
 
-
                     break;
 
                 case "guests":
-                    System.out.println("Lista de persoane care participa la eveniment: ");
-
-
+                    guests();
                     break;
 
                 case "waitList":
-                    System.out.println("Persoanele din lista de asteptare: ");
-
-
+                    waitList();
                     break;
 
                 case "available":
-                    System.out.println("Numarul de locuri libere: ");
-
-
+                    available();
                     break;
 
                 case "guests_no":
-                    System.out.println("Numarul de persoane care participa la eveniment: ");
-
-
+                    guests_no();
                     break;
 
                 case "waitlist_no":
-                    System.out.println("Numarul de persoane din lista de asteptare: ");
-
-
+                    waitlist_no();
                     break;
 
                 case "subscribe_no":
-                    System.out.println("Numarul total de persoane inscrise: ");
-
-
+                    subscribe_no();
                     break;
 
                 case "search":
-                    System.out.println("Cauta toti invitatii conform sirului de caractere introdus: ");
-
-                    break;
-
-                case "quit":
-                    System.out.println("Inchide aplicatia.");
+                    search();
                     break;
 
                 default:
                     System.out.println("Comanda introdusa nu exista!");
                     break;
             }
-
-            newCommand();
+            chosedOption = newCommand();
         }
 
         sc.close();
     }
-
 
 }
