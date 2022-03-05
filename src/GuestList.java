@@ -70,36 +70,6 @@ public class GuestList {
         return null;
     }
 
-
-//    public boolean removeP(Guest guest){
-//        for(Guest guests : participantsList){
-//            if(guest.equals(guests)){
-//                participantsList.remove(guest);
-//            }
-//            if (waitingList.size() != 0) {
-//                //add 1st person on waiting list to participants list
-//                participantsList.add(waitingList.get(0));
-//                waitingList.remove(0);
-//            }
-//
-//            System.out.println("Person has been successfully removed");
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    public boolean removeW(Guest guest){
-//        for(Guest guests : waitingList){
-//            if(guest.equals(guests)){
-//               waitingList.remove(guest);
-//            }
-//            System.out.println("Person has been successfully removed");
-//            return true;
-//        }
-//        return false;
-//    }
-
-
     public boolean isRegistered(Guest guest) {
         if (waitingList.size() == 0) {
             return false;
@@ -138,9 +108,9 @@ public class GuestList {
                 return true;
             }
         }
-            for(int i = 0; i<waitingList.size(); i++){
+        for (int i = 0; i < waitingList.size(); i++) {
             if ((waitingList.get(i).getFirstName().equalsIgnoreCase(str1)) &&
-                    waitingList.get(i).getLastName().equalsIgnoreCase(str2)){
+                    waitingList.get(i).getLastName().equalsIgnoreCase(str2)) {
                 System.out.println("Persoana este in lista de asteptare");
                 return true;
             }

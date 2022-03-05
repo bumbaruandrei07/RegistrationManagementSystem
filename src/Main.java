@@ -96,10 +96,10 @@ public class Main {
                 s2 = sc.next();
                 Guest guest1 = new Guest(s1, s2, "", "");
 
-                if (!guestList.checkName(s1, s2)) {
-                    System.out.println("Nu exista participantul cautat in nicio lista!");
-                    break;
-                }
+//                if (!guestList.checkName(s1, s2)) {
+//                    System.out.println("Nu exista participantul cautat in nicio lista!");
+//                    break;
+//                }
                 guestList.remove(guest1);
                 break;
 
@@ -108,10 +108,10 @@ public class Main {
                 s1 = sc.next();
                 Guest guest2 = new Guest("", "", s1, "");
 
-                if (!guestList.checkEmail(s1)) {
-                    System.out.println("Nu exista participantul cautat in nicio lista!");
-                    break;
-                }
+//                if (!guestList.checkEmail(s1)) {
+//                    System.out.println("Nu exista participantul cautat in nicio lista!");
+//                    break;
+//                }
                 guestList.remove(guest2);
                 break;
 
@@ -120,10 +120,10 @@ public class Main {
                 System.out.println("Introduceti numarul de telefon: ");
                 s1 = sc.next();
                 Guest guest3 = new Guest("", "", "", s1);
-                if (!guestList.checkPhoneNumber(s1)) {
-                    System.out.println("Nu exista participantul cautat in nicio lista!");
-                    break;
-                }
+//                if (!guestList.checkPhoneNumber(s1)) {
+//                    System.out.println("Nu exista participantul cautat in nicio lista!");
+//                    break;
+//                }
                 guestList.remove(guest3);
                 break;
 
