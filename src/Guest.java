@@ -74,7 +74,6 @@ public class Guest {
                 System.out.println("Phone number updated");
                 break;
         }
-        System.out.println(guest);
         return guest;
     }
 

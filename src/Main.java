@@ -97,38 +97,23 @@ public class Main {
                 Guest guest1 = new Guest(s1, s2, "", "");
 
 
-//                if (!guestList.checkName(s1, s2)) {
-//                    System.out.println("Nu exista participantul cautat in nicio lista!");
-//                    break;
-//                }
-
-                if (!guestList.isRegistered(guest1)) {
+                if (!guestList.checkName(s1, s2)) {
                     System.out.println("Nu exista participantul cautat in nicio lista!");
                     break;
                 }
                 guestList.remove(guest1);
-//                guestList.removeP(guest1);
-//                guestList.removeW(guest1);
                 break;
 
             case "B":
                 System.out.println("Introduceti e-mailul: ");
                 s1 = sc.next();
                 Guest guest2 = new Guest("", "", s1, "");
-//
-//                if (!guestList.checkEmail(s1)) {
-//                    System.out.println("Nu exista participantul cautat in nicio lista!");
-//                    break;
-//                }
 
-                if (!guestList.isRegistered(guest2)) {
+                if (!guestList.checkEmail(s1)) {
                     System.out.println("Nu exista participantul cautat in nicio lista!");
                     break;
                 }
                 guestList.remove(guest2);
-//                System.out.println(guestList.removeP(guest2));
-//                System.out.println(guestList.removeW(guest2));
-
                 break;
 
 
@@ -136,7 +121,7 @@ public class Main {
                 System.out.println("Introduceti numarul de telefon: ");
                 s1 = sc.next();
                 Guest guest3 = new Guest("", "", "", s1);
-                if (!guestList.isRegistered(guest3)) {
+                if (!guestList.checkEmail(s1)) {
                     System.out.println("Nu exista participantul cautat in nicio lista!");
                     break;
                 }
@@ -162,8 +147,8 @@ public class Main {
                 System.out.println("Enter last name: ");
                 String str2 = sc.next();
                 Guest guest1 = new Guest(str1, str2);
-                if (guestList.findGuestInWaitingList(guest1) == null && guestList.findGuestInParticipantsList(guest1) == null) {
-                    System.out.println("Nu exista participantul cautat!");
+                if (!guestList.checkName(str1,str2)) {
+                    System.out.println("Nu exista participantul cautat in nicio lista!");
                     break;
                 }
 
@@ -172,6 +157,7 @@ public class Main {
                 System.out.println("Enter new first name: ");
                 String str3 = sc.next();
                 guest1.updateGuest(guest1,options,str3,"","","");
+                System.out.println(guest1);
                 break;
 
             case "B":
