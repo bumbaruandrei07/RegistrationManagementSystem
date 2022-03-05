@@ -15,9 +15,6 @@ public class Guest {
         this.email = email;
     }
 
-
-
-
     public Guest(String lastName, String firstName) {
         this.lastName = lastName;
         this.firstName = firstName;

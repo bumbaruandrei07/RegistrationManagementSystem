@@ -87,14 +87,14 @@ public class Main {
         String options, s1, s2;
         System.out.println("S-a ales optiunea de stergere a unui participant.");
         System.out.println("Introduceti una dintre optiunile : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
-        options = sc.nextLine();
+        options = sc.next();
         switch (options) {
             case "A":
                 System.out.println("First Name: ");
-                s1 = sc.nextLine();
+                s1 = sc.next();
                 System.out.println("Last Name: ");
-                s2 = sc.nextLine();
-                Guest guest = new Guest(s1, s2);
+                s2 = sc.next();
+                Guest guest = new Guest(s1, s2, "", "");
                 if (!guestList.checkName(s1, s2)) {
                     System.out.println("Nu exista participantul cautat");
                     break;
@@ -104,8 +104,8 @@ public class Main {
 
             case "B":
                 System.out.println("Introduceti e-mailul: ");
-                s1 = sc.nextLine();
-                Guest guest1 = new Guest(s1);
+                s1 = sc.next();
+                Guest guest1 = new Guest("", "", s1, "");
                 if (!guestList.checkEmail(s1)) {
                     System.out.println("Nu exista participantul cautat!");
                     break;
@@ -114,8 +114,8 @@ public class Main {
                 break;
             case "C":
                 System.out.println("Introduceti numarul de telefon: ");
-                s1 = sc.nextLine();
-                Guest guest2 = new Guest(s1);
+                s1 = sc.next();
+                Guest guest2 = new Guest("", "", "", s1);
                 if (!guestList.checkPhoneNumber(s1)) {
                     System.out.println("Nu exista participantul!");
                     break;
@@ -126,17 +126,11 @@ public class Main {
             default:
                 System.out.println("Comanda introdusa este invalida!");
                 break;
-
-
         }
     }
 
 
     public static void main(String[] args) {
-
-        ArrayList<Guest> guests = new ArrayList<Guest>();
-        guests.add(new Guest("Andrei", "Bumbaru", "bumbaru.andrei@gmail.com", "0763411231"));
-        guests.add(new Guest("Robert", "Nita", "robert.nita@gmail.com", "0733211121"));
 
         System.out.println("Welcome to the new Registration Management System! ");
         String chosedOption = newCommand();
