@@ -46,7 +46,7 @@ public class GuestList {
                 //removing the guest from the waiting list
                 waitingList.remove(0);
 
-                //add 1st person on waiting list to participants list if there is an available place
+                //add 1st person on waiting list to participants list if there is an available place on the participants list
                 if (participantsList.size() < availablePlaces) {
                     participantsList.add(waitingList.get(0));
                 }
@@ -89,7 +89,7 @@ public class GuestList {
         return null;
     }
 
-    //aux method used in remove()
+    //helper method used in remove()
     public boolean isRegistered(Guest guest) {
         if (waitingList.size() == 0) {
             return false;
@@ -185,7 +185,6 @@ public class GuestList {
 
 
     //Getters
-
     public ArrayList<Guest> getParticipantsList() {
 
         if (participantsList.size() == 0) {

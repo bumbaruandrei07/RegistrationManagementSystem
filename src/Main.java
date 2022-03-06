@@ -3,10 +3,8 @@ import java.util.Scanner;
 
 public class Main {
 
-
     private static final Scanner sc = new Scanner(System.in);
     private static final GuestList guestList = new GuestList(1);
-
 
     private static String newCommand() {
         System.out.println("\nEnter a new command:  ");
@@ -81,7 +79,6 @@ public class Main {
         subSequence = sc.next();
         guestList.partialSearch(subSequence);
     }
-
 
     private static void remove() {
         String options, s1, s2;
