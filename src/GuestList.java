@@ -67,6 +67,16 @@ public class GuestList {
                 return participantsList.get(i);
             }
         }
+
+        for (int i = 0; i < waitingList.size(); i++) {
+            if (waitingList.get(i).getFirstName().equalsIgnoreCase(s1) &&
+                    (waitingList.get(i).getLastName().equalsIgnoreCase(s2)) ||
+                    (waitingList.get(i).getEmail().equalsIgnoreCase(s3)) ||
+                    (waitingList.get(i).getPhoneNumber().equalsIgnoreCase(s4))) {
+                return waitingList.get(i);
+            }
+        }
+
         return null;
     }
 
@@ -128,6 +138,13 @@ public class GuestList {
                 }
             }
         }
+
+        for (int i = 0; i < waitingList.size(); i++) {
+            if (waitingList.get(i).getEmail().equalsIgnoreCase(str)) {
+                System.out.println("Persoana este in lista de asteptare!");
+                return true;
+            }
+        }
         System.out.println("Persoana nu se afla pe nicio lista!");
         return false;
     }
@@ -143,7 +160,14 @@ public class GuestList {
                 return true;
             }
         }
-        System.out.println("Persoana este in lista de asteptare!");
+
+        for (int i = 0; i < waitingList.size(); i++) {
+            if (waitingList.get(i).getPhoneNumber().equalsIgnoreCase(str)) {
+                System.out.println("Persoana este in lista de asteptare!");
+                return true;
+            }
+        }
+        System.out.println("Persoana nu se afla pe nicio lista!");
         return false;
     }
 
@@ -240,10 +264,18 @@ public class GuestList {
                     guest.getEmail().toLowerCase().contains(str) ||
                     guest.getPhoneNumber().toLowerCase().contains(str)) {
                 foundGuest.add(guest);
-            } else {
-                System.out.println("Nu exista participantul ce contine sirul de caractere introdus!");
             }
         }
+
+        for (Guest guest : waitingList) {
+            if (guest.getFirstName().toLowerCase().contains(str) ||
+                    guest.getLastName().toLowerCase().contains(str) ||
+                    guest.getEmail().toLowerCase().contains(str) ||
+                    guest.getPhoneNumber().toLowerCase().contains(str)) {
+                foundGuest.add(guest);
+            }
+        }
+
         System.out.println(foundGuest);
         return foundGuest;
     }
