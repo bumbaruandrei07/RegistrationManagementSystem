@@ -5,9 +5,6 @@ public class Guest {
     private String email;
     private String phoneNumber;
 
-    public Guest() {
-        this("", "", "", "");
-    }
 
     public Guest(String email) {
         this.email = email;
@@ -38,44 +35,45 @@ public class Guest {
     }
 
 
-    public boolean checkGuest(String str) {
-        if (str == null) {
-            return false;
-        }
-        str = str.toLowerCase();
-        if (lastName.toLowerCase().contains(str) ||
-                firstName.toLowerCase().contains(str) ||
-                email.toLowerCase().contains(str) ||
-                phoneNumber.toLowerCase().contains(str)) {
-            return true;
-        }
-        return false;
-    }
+//    public boolean checkGuest(String str) {
+//        if (str == null) {
+//            return false;
+//        }
+//        str = str.toLowerCase();
+//        if (lastName.toLowerCase().contains(str) ||
+//                firstName.toLowerCase().contains(str) ||
+//                email.toLowerCase().contains(str) ||
+//                phoneNumber.toLowerCase().contains(str)) {
+//            return true;
+//        }
+//        return false;
+//    }
 
-    public Guest updateGuest(Guest guest, int option, String updatedFirstName, String updatedLastName, String newEmail, String newPhoneNumber) {
-        switch (option) {
-            case 1:
-                this.firstName = updatedFirstName;
-                System.out.println("First name updated: " + getFirstName());
-                break;
 
-            case 2:
-                this.lastName = updatedLastName;
-                System.out.println("Last name updated: " + getLastName());
-                break;
-
-            case 3:
-                this.email = newEmail;
-                System.out.println("Email updated");
-                break;
-
-            case 4:
-                this.phoneNumber = newPhoneNumber;
-                System.out.println("Phone number updated");
-                break;
-        }
-        return guest;
-    }
+//    public Guest updateGuest(Guest guest, int option, String updatedFirstName, String updatedLastName, String newEmail, String newPhoneNumber) {
+//        switch (option) {
+//            case 1:
+//                this.firstName = updatedFirstName;
+//                System.out.println("First name updated: " + getFirstName());
+//                break;
+//
+//            case 2:
+//                this.lastName = updatedLastName;
+//                System.out.println("Last name updated: " + getLastName());
+//                break;
+//
+//            case 3:
+//                this.email = newEmail;
+//                System.out.println("Email updated");
+//                break;
+//
+//            case 4:
+//                this.phoneNumber = newPhoneNumber;
+//                System.out.println("Phone number updated");
+//                break;
+//        }
+//        return guest;
+//    }
 
 
     public String getLastName() {

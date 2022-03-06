@@ -3,17 +3,20 @@ import java.util.ArrayList;
 public class GuestList {
 
 
+    //fields
     private final int availablePlaces;
     private ArrayList<Guest> participantsList;
     private ArrayList<Guest> waitingList;
 
 
+    //constructor using all fields
     public GuestList(int availablePlaces) {
         this.availablePlaces = availablePlaces;
         this.participantsList = new ArrayList<>(availablePlaces);
         this.waitingList = new ArrayList<>();
     }
 
+    //add a new guest method used in main (entry-point of our app)
     public int addParticipant(Guest guest) {
         if (isRegistered(guest)) {
             System.out.println("This user is already registered");
@@ -33,15 +36,20 @@ public class GuestList {
     }
 
 
+    //remove a guest method used in main
     public boolean remove(Guest guest) {
         for (int i = 0; i < participantsList.size(); i++) {
             if (guest.equals(participantsList.get(i))) {
                 participantsList.remove(i);
             }
-            if (waitingList.size() != 0) {
-                //add 1st person on waiting list to participants list
-                participantsList.add(waitingList.get(0));
+            if (waitingList.size() > 0) {
+                //removing the guest from the waiting list
                 waitingList.remove(0);
+
+                //add 1st person on waiting list to participants list if there is an available place
+                if (participantsList.size() < availablePlaces) {
+                    participantsList.add(waitingList.get(0));
+                }
             }
             System.out.println("Person has been successfully removed");
             return true;
@@ -58,6 +66,7 @@ public class GuestList {
         return false;
     }
 
+    //update method used in main
     public Guest updateHelper(String s1, String s2, String s3, String s4) {
         for (int i = 0; i < participantsList.size(); i++) {
             if ((participantsList.get(i).getFirstName().equalsIgnoreCase(s1)) &&
@@ -80,6 +89,7 @@ public class GuestList {
         return null;
     }
 
+    //aux method used in remove()
     public boolean isRegistered(Guest guest) {
         if (waitingList.size() == 0) {
             return false;
@@ -108,6 +118,7 @@ public class GuestList {
     }
 
 
+    // searching method 1
     public boolean checkName(String str1, String str2) {
         for (int i = 0; i < participantsList.size(); i++) {
             if ((participantsList.get(i).getFirstName().equalsIgnoreCase(str1)) &&
@@ -129,6 +140,7 @@ public class GuestList {
         return false;
     }
 
+    // searching method 2
     public boolean checkEmail(String str) {
         for (int i = 0; i < participantsList.size(); i++) {
             if (participantsList.get(i).getEmail().equalsIgnoreCase(str)) {
@@ -150,7 +162,7 @@ public class GuestList {
     }
 
 
-    // another way to check -> but if you have 2 obj with the same fields it won't return both objs, just the first !
+    // searching method 3
     public boolean checkPhoneNumber(String str) {
         for (int i = 0; i < participantsList.size(); i++) {
             if (participantsList.get(i).getPhoneNumber().equalsIgnoreCase(str)) {
@@ -207,8 +219,6 @@ public class GuestList {
         return participantsList.size() + waitingList.size();
     }
 
-    // searching method
-
 
 //    public Guest findGuest(Guest guest) {
 //
@@ -231,27 +241,27 @@ public class GuestList {
 //    }
 
 
-    public Guest findGuestInParticipantsList(Guest guest) {
-        for (Guest currentGuest1 : participantsList) {
-            if (currentGuest1.equals(guest)) {
-//                System.out.println(currentGuest1);
-                return currentGuest1;
-            }
-
-        }
-        return null;
-    }
-
-    public Guest findGuestInWaitingList(Guest guest) {
-        for (Guest currentGuest : waitingList) {
-            if (currentGuest.equals(guest)) {
-//                System.out.println(currentGuest);
-                return currentGuest;
-            }
-
-        }
-        return null;
-    }
+//    public Guest findGuestInParticipantsList(Guest guest) {
+//        for (Guest currentGuest1 : participantsList) {
+//            if (currentGuest1.equals(guest)) {
+////                System.out.println(currentGuest1);
+//                return currentGuest1;
+//            }
+//
+//        }
+//        return null;
+//    }
+//
+//    public Guest findGuestInWaitingList(Guest guest) {
+//        for (Guest currentGuest : waitingList) {
+//            if (currentGuest.equals(guest)) {
+////                System.out.println(currentGuest);
+//                return currentGuest;
+//            }
+//
+//        }
+//        return null;
+//    }
 
 
     //partial searching method
