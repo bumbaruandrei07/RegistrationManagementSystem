@@ -2,12 +2,10 @@ import java.util.ArrayList;
 
 public class GuestList {
 
-
     //fields
     private final int availablePlaces;
     private ArrayList<Guest> participantsList;
     private ArrayList<Guest> waitingList;
-
 
     //constructor using all fields
     public GuestList(int availablePlaces) {
@@ -150,7 +148,6 @@ public class GuestList {
                 }
             }
         }
-
         for (int i = 0; i < waitingList.size(); i++) {
             if (waitingList.get(i).getEmail().equalsIgnoreCase(str)) {
                 System.out.println("Persoana este in lista de asteptare!");
@@ -172,7 +169,6 @@ public class GuestList {
                 return true;
             }
         }
-
         for (int i = 0; i < waitingList.size(); i++) {
             if (waitingList.get(i).getPhoneNumber().equalsIgnoreCase(str)) {
                 System.out.println("Persoana este in lista de asteptare!");
@@ -264,7 +260,6 @@ public class GuestList {
 
 
     //partial searching method
-
     public ArrayList<Guest> partialSearch(String str) {
         ArrayList<Guest> foundGuest = new ArrayList<>();
         for (Guest guest : participantsList) {
@@ -284,7 +279,6 @@ public class GuestList {
                 foundGuest.add(guest);
             }
         }
-
         System.out.println(foundGuest);
         return foundGuest;
     }
