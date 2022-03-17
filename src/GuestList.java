@@ -215,48 +215,27 @@ public class GuestList {
     }
 
 
-//    public Guest findGuest(Guest guest) {
-//
-//            for (Guest currentGuest1 : participantsList) {
-//                if (currentGuest1.equals(guest)) {
-//                    System.out.println(currentGuest1);
-//
-//                }
-//                return currentGuest1;
-//            }
-//
-//            for (Guest currentGuest : waitingList) {
-//                if (currentGuest.equals(guest)) {
-//                    System.out.println(currentGuest);
-//                }
-//                return currentGuest;
-//            }
-//
-//        return null;
-//    }
 
 
-//    public Guest findGuestInParticipantsList(Guest guest) {
-//        for (Guest currentGuest1 : participantsList) {
-//            if (currentGuest1.equals(guest)) {
-////                System.out.println(currentGuest1);
-//                return currentGuest1;
-//            }
-//
-//        }
-//        return null;
-//    }
-//
-//    public Guest findGuestInWaitingList(Guest guest) {
-//        for (Guest currentGuest : waitingList) {
-//            if (currentGuest.equals(guest)) {
-////                System.out.println(currentGuest);
-//                return currentGuest;
-//            }
-//
-//        }
-//        return null;
-//    }
+    public Guest findGuestInParticipantsList(Guest guest) {
+        for (Guest currentGuest1 : participantsList) {
+            if (currentGuest1.equals(guest)) {
+                System.out.println(currentGuest1);
+                return currentGuest1;
+            }
+        }
+        return null;
+    }
+
+    public Guest findGuestInWaitingList(Guest guest) {
+        for (Guest currentGuest : waitingList) {
+            if (currentGuest.equals(guest)) {
+                System.out.println(currentGuest);
+                return currentGuest;
+            }
+        }
+        return null;
+    }
 
 
     //partial searching method

@@ -143,7 +143,12 @@ public class Main {
                 System.out.println("Enter last name: ");
                 String str2 = sc.next();
                 Guest guest1 = new Guest(str1, str2);
-                guestList.checkName(str1, str2);
+
+                //if the guest is not found we will stop the update!
+                if (guestList.findGuestInParticipantsList(guest1) == null && guestList.findGuestInWaitingList(guest1) == null) {
+                    System.out.println("Participantul nu exista pe nicio lista!");
+                    break;
+                }
 
                 System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3(update e-mail) / 4 (update Phone Number");
                 int optionsI = sc.nextInt();
@@ -164,7 +169,11 @@ public class Main {
                 System.out.println("Enter e-mail: ");
                 String str4 = sc.next();
                 Guest guest2 = new Guest(str4);
-                guestList.checkEmail(str4);
+
+                //if the guest is not found we will stop the update!
+                if (!guestList.checkEmail(str4)) {
+                    break;
+                }
 
                 System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number");
                 int optionsII = sc.nextInt();
@@ -185,7 +194,11 @@ public class Main {
                 System.out.println("Enter phone number:");
                 String str6 = sc.next();
                 Guest guest3 = new Guest(str6);
-                guestList.checkPhoneNumber(str6);
+
+                //if the guest is not found we will stop the update!
+                if (!guestList.checkPhoneNumber(str6)) {
+                    break;
+                }
 
                 System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number)");
                 int optionsIV = sc.nextInt();
@@ -203,7 +216,6 @@ public class Main {
 
                 break;
         }
-
     }
 
     private static void check() {
@@ -217,39 +229,18 @@ public class Main {
                 s1 = sc.next();
                 System.out.println("Enter last name: ");
                 s2 = sc.next();
-//                Guest guest1 = new Guest(s1, s2);
-//                if (guestList.findGuestInWaitingList(guest1) == null && guestList.findGuestInParticipantsList(guest1) == null) {
-//                    System.out.println("Nu exista participantul cautat!");
-//                    break;
-//                }
-//                System.out.println(guestList.findGuestInWaitingList(guest1));
-//                System.out.println(guestList.findGuestInParticipantsList(guest1));
                 guestList.checkName(s1, s2);
                 break;
 
             case "B":
                 System.out.println("Enter e-mail: ");
                 s1 = sc.next();
-                Guest guest2 = new Guest(s1);
-//                if (guestList.findGuestInWaitingList(guest2) == null && guestList.findGuestInParticipantsList(guest2) == null) {
-//                    System.out.println("Nu exista participantul cautat!");
-//                    break;
-//                }
-//                System.out.println(guestList.findGuestInParticipantsList(guest2));
-//                System.out.println(guestList.findGuestInWaitingList(guest2));
                 guestList.checkEmail(s1);
                 break;
 
             case "C":
                 System.out.println("Enter phone number: ");
                 s1 = sc.next();
-//                Guest guest3 = new Guest(s1);
-//                if (guestList.findGuestInWaitingList(guest3) == null && guestList.findGuestInParticipantsList(guest3) == null) {
-//                    System.out.println("Nu exista participantul cautat!");
-//                    break;
-//                }
-//                System.out.println(guestList.findGuestInParticipantsList(guest3));  // guestList.checkPhoneNumber(s1);
-//                System.out.println(guestList.findGuestInWaitingList(guest3));
                 guestList.checkPhoneNumber(s1);
                 break;
 
