@@ -40,14 +40,19 @@ public class GuestList {
             if (guest.equals(participantsList.get(i))) {
                 participantsList.remove(i);
             }
-            if (waitingList.size() > 0) {
-                //removing the guest from the waiting list
-                waitingList.remove(0);
 
-                //add 1st person on waiting list to participants list if there is an available place on the participants list
+            //if there is someone on waiting list
+            if (waitingList.size() > 0) {
+
+                //if on participants list there is an available place
                 if (participantsList.size() < availablePlaces) {
+
+                    //add 1st person on waiting list to participants list if there is an available place on the participants list
                     participantsList.add(waitingList.get(0));
                 }
+                //removing the first guest from the waiting list
+                waitingList.remove(0);
+
             }
             System.out.println("Person has been successfully removed");
             return true;
@@ -83,7 +88,6 @@ public class GuestList {
                 return waitingList.get(i);
             }
         }
-
         return null;
     }
 
@@ -214,30 +218,6 @@ public class GuestList {
         return participantsList.size() + waitingList.size();
     }
 
-
-
-
-    public Guest findGuestInParticipantsList(Guest guest) {
-        for (Guest currentGuest1 : participantsList) {
-            if (currentGuest1.equals(guest)) {
-                System.out.println(currentGuest1);
-                return currentGuest1;
-            }
-        }
-        return null;
-    }
-
-    public Guest findGuestInWaitingList(Guest guest) {
-        for (Guest currentGuest : waitingList) {
-            if (currentGuest.equals(guest)) {
-                System.out.println(currentGuest);
-                return currentGuest;
-            }
-        }
-        return null;
-    }
-
-
     //partial searching method
     public ArrayList<Guest> partialSearch(String str) {
         ArrayList<Guest> foundGuest = new ArrayList<>();
@@ -261,4 +241,21 @@ public class GuestList {
         System.out.println(foundGuest);
         return foundGuest;
     }
+
+    //    public Guest findGuestInAnyList(Guest guest) {
+//        for (Guest currentGuest1 : participantsList) {
+//            if (currentGuest1.equals(guest)) {
+//                System.out.println(currentGuest1);
+//                return currentGuest1;
+//            }
+//        }
+//        for (Guest currentGuest : waitingList) {
+//            if (currentGuest.equals(guest)) {
+//                System.out.println(currentGuest);
+//                return currentGuest;
+//            }
+//        }
+//        return null;
+//    }
+
 }

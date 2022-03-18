@@ -93,10 +93,10 @@ public class Main {
                 s2 = sc.next();
                 Guest guest1 = new Guest(s1, s2, "", "");
 
-//                if (!guestList.checkName(s1, s2)) {
-//                    System.out.println("Nu exista participantul cautat in nicio lista!");
-//                    break;
-//                }
+                if (!guestList.checkName(s1, s2)) {
+                    break;
+                }
+
                 guestList.remove(guest1);
                 break;
 
@@ -105,10 +105,9 @@ public class Main {
                 s1 = sc.next();
                 Guest guest2 = new Guest("", "", s1, "");
 
-//                if (!guestList.checkEmail(s1)) {
-//                    System.out.println("Nu exista participantul cautat in nicio lista!");
-//                    break;
-//                }
+                if (!guestList.checkEmail(s1)) {
+                    break;
+                }
                 guestList.remove(guest2);
                 break;
 
@@ -117,10 +116,9 @@ public class Main {
                 System.out.println("Introduceti numarul de telefon: ");
                 s1 = sc.next();
                 Guest guest3 = new Guest("", "", "", s1);
-//                if (!guestList.checkPhoneNumber(s1)) {
-//                    System.out.println("Nu exista participantul cautat in nicio lista!");
-//                    break;
-//                }
+                if (!guestList.checkPhoneNumber(s1)) {
+                    break;
+                }
                 guestList.remove(guest3);
                 break;
 
@@ -144,9 +142,14 @@ public class Main {
                 String str2 = sc.next();
                 Guest guest1 = new Guest(str1, str2);
 
+
+//                if (guestList.findGuestInParticipantsList(guest1) == null && guestList.findGuestInWaitingList(guest1) == null) {
+//                    System.out.println("Participantul nu exista pe nicio lista!");
+//                    break;
+//                }
+
                 //if the guest is not found we will stop the update!
-                if (guestList.findGuestInParticipantsList(guest1) == null && guestList.findGuestInWaitingList(guest1) == null) {
-                    System.out.println("Participantul nu exista pe nicio lista!");
+                if(!guestList.checkName(str1,str2)){
                     break;
                 }
 
@@ -168,13 +171,11 @@ public class Main {
             case "B":
                 System.out.println("Enter e-mail: ");
                 String str4 = sc.next();
-                Guest guest2 = new Guest(str4);
 
                 //if the guest is not found we will stop the update!
                 if (!guestList.checkEmail(str4)) {
                     break;
                 }
-
                 System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number");
                 int optionsII = sc.nextInt();
                 System.out.println("Enter the new value: ");
@@ -193,7 +194,6 @@ public class Main {
             case "C":
                 System.out.println("Enter phone number:");
                 String str6 = sc.next();
-                Guest guest3 = new Guest(str6);
 
                 //if the guest is not found we will stop the update!
                 if (!guestList.checkPhoneNumber(str6)) {
