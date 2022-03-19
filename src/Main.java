@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Main {
@@ -149,7 +149,7 @@ public class Main {
 //                }
 
                 //if the guest is not found we will stop the update!
-                if(!guestList.checkName(str1,str2)){
+                if (!guestList.checkName(str1, str2)) {
                     break;
                 }
 
@@ -213,7 +213,6 @@ public class Main {
                 } else if (optionsIV == 4) {
                     guestList.updateHelper(null, null, null, str6).setPhoneNumber(str7);
                 } else System.out.println("Invalid option!");
-
                 break;
         }
     }
@@ -312,7 +311,6 @@ public class Main {
             }
             chosedOption = newCommand();
         }
-
         sc.close();
     }
 

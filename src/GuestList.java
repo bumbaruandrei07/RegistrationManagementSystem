@@ -49,13 +49,12 @@ public class GuestList {
 
                     //add 1st person on waiting list to participants list if there is an available place on the participants list
                     participantsList.add(waitingList.get(0));
+                    //removing the first guest from the waiting list
+                    waitingList.remove(0);
+                    System.out.println("Person has been successfully removed");
+                    return true;
                 }
-                //removing the first guest from the waiting list
-                waitingList.remove(0);
-
             }
-            System.out.println("Person has been successfully removed");
-            return true;
         }
 
         for (int i = 0; i < waitingList.size(); i++) {
@@ -242,6 +241,8 @@ public class GuestList {
         return foundGuest;
     }
 
+
+    // to be used
     //    public Guest findGuestInAnyList(Guest guest) {
 //        for (Guest currentGuest1 : participantsList) {
 //            if (currentGuest1.equals(guest)) {
