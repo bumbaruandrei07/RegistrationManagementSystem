@@ -1,4 +1,5 @@
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -27,16 +28,31 @@ public class Main {
         System.out.println("quit         - Inchide aplicatia");
     }
 
-
-    public static void addGuest() {
+    public static void addGuest() throws IllegalArgumentException, IndexOutOfBoundsException {
         System.out.println("First name: ");
         String firstName = sc.next();
+        if (firstName.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Prenumele nu poate fi format din cifre!");
+        }
         System.out.println("Last name: ");
         String lastName = sc.next();
-        System.out.println("E-mail: ");
+        if (lastName.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Numele nu poate fi format din cifre!");
+        }
+        System.out.println("Enter email address (Pattern: name@gmail.com): ");
         String email = sc.next();
+        if (!email.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
+            throw new IllegalArgumentException("Email-ul trebuie sa contina pattern-ul : name@gmail.com");
+        }
         System.out.println("Phone number: ");
         String phoneNumber = sc.next();
+        if (!phoneNumber.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Numarul de telefon trebuie sa fie format doar din cifre!");
+        }
+
+        if (phoneNumber.length() != 10) {
+            throw new IndexOutOfBoundsException("Numarul de telefon contine exact 10 cifre!");
+        }
         Guest guest = new Guest(firstName, lastName, email, phoneNumber);
         System.out.println("New guest:\n" + guest);
         guestList.addParticipant(guest);
@@ -80,67 +96,77 @@ public class Main {
         guestList.partialSearch(subSequence);
     }
 
-    private static void remove() {
-        String options, s1, s2;
+    private static void remove() throws IndexOutOfBoundsException, NullPointerException, InputMismatchException {
+        int options;
+        String s1, s2;
         System.out.println("S-a ales optiunea de stergere a unui participant.");
-        System.out.println("Introduceti una dintre optiunile : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
-        options = sc.next();
-        switch (options) {
-            case "A":
-                System.out.println("First Name: ");
-                s1 = sc.next();
-                System.out.println("Last Name: ");
-                s2 = sc.next();
-                Guest guest1 = new Guest(s1, s2, "", "");
+        System.out.println("Introduceti una dintre optiunile : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
+        try {
+            options = sc.nextInt();
+            if (options != 1 && options != 2 && options != 3) {
+                throw new IndexOutOfBoundsException("Introduceti una dintre optiunile : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
+            }
 
-                if (!guestList.checkName(s1, s2)) {
+            switch (options) {
+                case 1:
+                    System.out.println("First Name: ");
+                    s1 = sc.next();
+                    System.out.println("Last Name: ");
+                    s2 = sc.next();
+                    Guest guest1 = new Guest(s1, s2, "", "");
+
+                    if (!guestList.checkName(s1, s2)) {
+                        throw new NullPointerException("Nu exista participantul cu acest nume!");
+                    }
+
+                    guestList.remove(guest1);
                     break;
-                }
 
-                guestList.remove(guest1);
-                break;
+                case 2:
+                    System.out.println("Introduceti e-mailul: ");
+                    s1 = sc.next();
+                    Guest guest2 = new Guest("", "", s1, "");
 
-            case "B":
-                System.out.println("Introduceti e-mailul: ");
-                s1 = sc.next();
-                Guest guest2 = new Guest("", "", s1, "");
-
-                if (!guestList.checkEmail(s1)) {
+                    if (!guestList.checkEmail(s1)) {
+                        throw new NullPointerException("Nu exista participantul cu acest e-mail!");
+                    }
+                    guestList.remove(guest2);
                     break;
-                }
-                guestList.remove(guest2);
-                break;
 
-
-            case "C":
-                System.out.println("Introduceti numarul de telefon: ");
-                s1 = sc.next();
-                Guest guest3 = new Guest("", "", "", s1);
-                if (!guestList.checkPhoneNumber(s1)) {
+                case 3:
+                    System.out.println("Introduceti numarul de telefon: ");
+                    s1 = sc.next();
+                    Guest guest3 = new Guest("", "", "", s1);
+                    if (!guestList.checkPhoneNumber(s1)) {
+                        throw new NullPointerException("Nu exista participantul cu acest numar de telefon!");
+                    }
+                    guestList.remove(guest3);
                     break;
-                }
-                guestList.remove(guest3);
-                break;
-
-            default:
-                System.out.println("Comanda introdusa este invalida!");
-                break;
+            }
+        } catch (InputMismatchException e) {
+            System.err.println("Error, this was not a number!!!");
+            sc.nextLine();
         }
     }
 
     private static void update() {
 
         System.out.println("Actualizeaza detaliile unei participant: ");
-        System.out.println("Introduceti una dintre optiunile de cautare a participantului : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
-        String option = sc.next();
+        System.out.println("Introduceti una dintre optiunile de cautare a participantului : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
 
-        switch (option) {
-            case "A":
-                System.out.println("Enter first name: ");
-                String str1 = sc.next();
-                System.out.println("Enter last name: ");
-                String str2 = sc.next();
-                Guest guest1 = new Guest(str1, str2);
+        try {
+            int option = sc.nextInt();
+            if ((option != 1) && (option != 2) && (option != 3)) {
+                throw new IndexOutOfBoundsException("Ati introdus o alta valoare din intervalul [1-3]");
+            }
+            switch (option) {
+                case 1:
+                    System.out.println("Enter first name: ");
+                    String str1 = sc.next();
+                    System.out.println("Enter last name: ");
+                    String str2 = sc.next();
+
+//                Guest guest1 = new Guest(str1, str2);
 
 
 //                if (guestList.findGuestInParticipantsList(guest1) == null && guestList.findGuestInWaitingList(guest1) == null) {
@@ -148,72 +174,77 @@ public class Main {
 //                    break;
 //                }
 
-                //if the guest is not found we will stop the update!
-                if (!guestList.checkName(str1, str2)) {
+                    //if the guest is not found we will stop the update!
+                    if (!guestList.checkName(str1, str2)) {
+                        throw new NullPointerException("The guest searched doesn't exists");
+                    }
+
+                    System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3(update e-mail) / 4 (update Phone Number");
+                    int optionsI = sc.nextInt();
+                    System.out.println("Enter new first name: ");
+                    String str3 = sc.next();
+                    if (optionsI == 1) {
+                        guestList.updateHelper(str1, str2, null, null).setFirstName(str3);
+                    } else if (optionsI == 2) {
+                        guestList.updateHelper(str1, str2, null, null).setLastName(str3);
+                    } else if (optionsI == 3) {
+                        guestList.updateHelper(str1, str2, null, null).setEmail(str3);
+                    } else if (optionsI == 4) {
+                        guestList.updateHelper(str1, str2, null, null).setPhoneNumber(str3);
+                    } else System.out.println("Invalid option!");
                     break;
-                }
 
-                System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3(update e-mail) / 4 (update Phone Number");
-                int optionsI = sc.nextInt();
-                System.out.println("Enter new first name: ");
-                String str3 = sc.next();
-                if (optionsI == 1) {
-                    guestList.updateHelper(str1, str2, null, null).setFirstName(str3);
-                } else if (optionsI == 2) {
-                    guestList.updateHelper(str1, str2, null, null).setLastName(str3);
-                } else if (optionsI == 3) {
-                    guestList.updateHelper(str1, str2, null, null).setEmail(str3);
-                } else if (optionsI == 4) {
-                    guestList.updateHelper(str1, str2, null, null).setPhoneNumber(str3);
-                } else System.out.println("Invalid option!");
-                break;
+                case 2:
+                    System.out.println("Enter e-mail: ");
+                    String str4 = sc.next();
 
-            case "B":
-                System.out.println("Enter e-mail: ");
-                String str4 = sc.next();
-
-                //if the guest is not found we will stop the update!
-                if (!guestList.checkEmail(str4)) {
+                    //if the guest is not found we will stop the update!
+                    if (!guestList.checkEmail(str4)) {
+                        break;
+                    }
+                    System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number");
+                    int optionsII = sc.nextInt();
+                    System.out.println("Enter the new value: ");
+                    String str5 = sc.next();
+                    if (optionsII == 1) {
+                        guestList.updateHelper(null, null, str4, null).setFirstName(str5);
+                    } else if (optionsII == 2) {
+                        guestList.updateHelper(null, null, str4, null).setLastName(str5);
+                    } else if (optionsII == 3) {
+                        guestList.updateHelper(null, null, str4, null).setEmail(str5);
+                    } else if (optionsII == 4) {
+                        guestList.updateHelper(null, null, str5, null).setPhoneNumber(str5);
+                    } else System.out.println("Invalid option!");
                     break;
-                }
-                System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number");
-                int optionsII = sc.nextInt();
-                System.out.println("Enter the new value: ");
-                String str5 = sc.next();
-                if (optionsII == 1) {
-                    guestList.updateHelper(null, null, str4, null).setFirstName(str5);
-                } else if (optionsII == 2) {
-                    guestList.updateHelper(null, null, str4, null).setLastName(str5);
-                } else if (optionsII == 3) {
-                    guestList.updateHelper(null, null, str4, null).setEmail(str5);
-                } else if (optionsII == 4) {
-                    guestList.updateHelper(null, null, str5, null).setPhoneNumber(str5);
-                } else System.out.println("Invalid option!");
-                break;
 
-            case "C":
-                System.out.println("Enter phone number:");
-                String str6 = sc.next();
+                case 3:
+                    System.out.println("Enter phone number:");
+                    String str6 = sc.next();
 
-                //if the guest is not found we will stop the update!
-                if (!guestList.checkPhoneNumber(str6)) {
+                    //if the guest is not found we will stop the update!
+                    if (!guestList.checkPhoneNumber(str6)) {
+                        break;
+                    }
+
+                    System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number)");
+                    int optionsIV = sc.nextInt();
+                    System.out.println("Enter the new value: ");
+                    String str7 = sc.next();
+                    if (optionsIV == 1) {
+                        guestList.updateHelper(null, null, null, str6).setFirstName(str7);
+                    } else if (optionsIV == 2) {
+                        guestList.updateHelper(null, null, null, str6).setLastName(str7);
+                    } else if (optionsIV == 3) {
+                        guestList.updateHelper(null, null, null, str6).setEmail(str7);
+                    } else if (optionsIV == 4) {
+                        guestList.updateHelper(null, null, null, str6).setPhoneNumber(str7);
+                    } else System.out.println("Invalid option!");
                     break;
-                }
+            }
+        } catch (InputMismatchException e) {
+            sc.nextLine();
+            System.out.println("Trebuie sa introduceti una dintre valorile 1 / 2 / 3");
 
-                System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3 (update e-mail) / 4 (update Phone Number)");
-                int optionsIV = sc.nextInt();
-                System.out.println("Enter the new value: ");
-                String str7 = sc.next();
-                if (optionsIV == 1) {
-                    guestList.updateHelper(null, null, null, str6).setFirstName(str7);
-                } else if (optionsIV == 2) {
-                    guestList.updateHelper(null, null, null, str6).setLastName(str7);
-                } else if (optionsIV == 3) {
-                    guestList.updateHelper(null, null, null, str6).setEmail(str7);
-                } else if (optionsIV == 4) {
-                    guestList.updateHelper(null, null, null, str6).setPhoneNumber(str7);
-                } else System.out.println("Invalid option!");
-                break;
         }
     }
 
@@ -222,6 +253,9 @@ public class Main {
         System.out.println("Verifica daca o persoana este inscrisa la eveniment: ");
         System.out.println("Introduceti una dintre optiunile : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
         option = sc.next();
+        if (!option.equals("A") && (!option.equals("B")) && (!option.equals("C"))) {
+            throw new IllegalArgumentException("Trebuie sa introduceti A, B sau C");
+        }
         switch (option) {
             case "A":
                 System.out.println("Enter first name: ");
