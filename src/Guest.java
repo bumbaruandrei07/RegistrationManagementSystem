@@ -1,14 +1,17 @@
-public class Guest {
+import java.io.*;
+import java.util.List;
+
+public class Guest implements Serializable {
 
     private String lastName;
     private String firstName;
     private String email;
     private String phoneNumber;
+    private static final long serialVersionUID = 1L;
 
-
-    public Guest(String lastName, String firstName) {
-        this.lastName = lastName;
+    public Guest(String firstName, String lastName) {
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Guest(String lastName, String firstName, String email, String phoneNumber) {

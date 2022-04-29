@@ -1,11 +1,15 @@
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
+
     private static final Scanner sc = new Scanner(System.in);
-    private static final GuestList guestList = new GuestList(1);
+    private static GuestList guestList = new GuestList(1);
 
     private static String newCommand() {
         System.out.println("\nEnter a new command:  ");
@@ -25,6 +29,7 @@ public class Main {
         System.out.println("waitlist_no  - Numarul de persoane din lista de asteptare");
         System.out.println("subscribe_no - Numarul total de persoane inscrise");
         System.out.println("search       - Cauta toti invitatii conform sirului de caractere introdus");
+        System.out.println("reset        - Sterge toti participantii existenti din lista de participare");
         System.out.println("quit         - Inchide aplicatia");
     }
 
@@ -90,10 +95,13 @@ public class Main {
     }
 
     private static void search() {
-        String subSequence;
         System.out.println("Cauta toti invitatii conform sirului de caractere introdus: ");
-        subSequence = sc.next();
+        String subSequence = sc.next();
         guestList.partialSearch(subSequence);
+    }
+
+    public static void resetGuestList() {
+        guestList.resetGuestList();
     }
 
     private static void remove() throws IndexOutOfBoundsException, NullPointerException, InputMismatchException {
@@ -283,9 +291,10 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Welcome to the new Registration Management System! ");
+        guestList = GuestList.readFromBinaryFile();
         String chosedOption = newCommand();
 
         while (!chosedOption.equals("quit")) {
@@ -297,6 +306,10 @@ public class Main {
 
                 case "add":
                     addGuest();
+                    break;
+
+                case "reset":
+                    resetGuestList();
                     break;
 
                 case "check":
@@ -345,6 +358,7 @@ public class Main {
             }
             chosedOption = newCommand();
         }
+        GuestList.writeToBinaryFile(guestList);
         sc.close();
     }
 

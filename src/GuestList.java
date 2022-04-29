@@ -1,11 +1,14 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class GuestList {
+public class GuestList implements Serializable {
 
     //fields
     private final int availablePlaces;
     private ArrayList<Guest> participantsList;
     private ArrayList<Guest> waitingList;
+    private static final long serialVersionUID = 1L;
 
     //constructor using all fields
     public GuestList(int availablePlaces) {
@@ -239,6 +242,33 @@ public class GuestList {
         }
         System.out.println(foundGuest);
         return foundGuest;
+    }
+
+    public static void writeToBinaryFile(GuestList guest) throws IOException {
+        try (ObjectOutputStream binaryFileOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("guests.dat")))) {
+            binaryFileOut.writeObject(guest);
+        }
+    }
+
+    public static GuestList readFromBinaryFile() throws IOException {
+
+        GuestList guests = null;
+        try (ObjectInputStream binaryFileIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream("guests.dat")))) {
+            guests = (GuestList) binaryFileIn.readObject();
+        } catch (ClassNotFoundException e) {
+            System.out.println("A class not found exception: " + e.getMessage());
+        }
+        return guests;
+    }
+
+    public void resetGuestList() {
+        try {
+            File file = new File("guests.dat");
+            file.delete();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Reset done!");
     }
 
 
