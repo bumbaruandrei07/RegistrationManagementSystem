@@ -261,7 +261,7 @@ public class GuestList implements Serializable {
         return guests;
     }
 
-    public void resetGuestList() {
+    public void deleteFile() {
         try {
             File file = new File("guests.dat");
             file.delete();
@@ -270,4 +270,12 @@ public class GuestList implements Serializable {
         }
         System.out.println("Reset done!");
     }
+
+    public void reset() {
+        participantsList.clear();
+        waitingList.clear();
+        System.out.println("Toate datele salvate in sistem au fost eliminate!");
+    }
+
+
 }

@@ -29,7 +29,8 @@ public class Main {
         System.out.println("waitlist_no  - Numarul de persoane din lista de asteptare");
         System.out.println("subscribe_no - Numarul total de persoane inscrise");
         System.out.println("search       - Cauta toti invitatii conform sirului de caractere introdus");
-        System.out.println("reset        - Sterge toti participantii existenti din lista de participare");
+        System.out.println("deleteFile   - Sterge fisierul ce contine datele salvate in sistem");
+        System.out.println("reset        - Sterge datele din fisierul ce contine toti invitatii inscrisi la eveniment");
         System.out.println("quit         - Inchide aplicatia");
     }
 
@@ -100,9 +101,14 @@ public class Main {
         guestList.partialSearch(subSequence);
     }
 
-    public static void resetGuestList() {
-        guestList.resetGuestList();
+    public static void deleteFile() {
+        guestList.deleteFile();
     }
+
+    private static void resetApp() {
+        guestList.reset();
+    }
+
 
     private static void remove() throws IndexOutOfBoundsException, NullPointerException, InputMismatchException {
         int options;
@@ -308,8 +314,12 @@ public class Main {
                     addGuest();
                     break;
 
+                case "deleteFile":
+                    deleteFile();
+                    break;
+
                 case "reset":
-                    resetGuestList();
+                    resetApp();
                     break;
 
                 case "check":
