@@ -270,23 +270,4 @@ public class GuestList implements Serializable {
         }
         System.out.println("Reset done!");
     }
-
-
-    // to be used
-    //    public Guest findGuestInAnyList(Guest guest) {
-//        for (Guest currentGuest1 : participantsList) {
-//            if (currentGuest1.equals(guest)) {
-//                System.out.println(currentGuest1);
-//                return currentGuest1;
-//            }
-//        }
-//        for (Guest currentGuest : waitingList) {
-//            if (currentGuest.equals(guest)) {
-//                System.out.println(currentGuest);
-//                return currentGuest;
-//            }
-//        }
-//        return null;
-//    }
-
 }
