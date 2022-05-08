@@ -1,8 +1,9 @@
 
+import exceptions.*;
+import exceptions.NumberFormatException;
+
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -34,16 +35,16 @@ public class Main {
         System.out.println("quit         - Inchide aplicatia");
     }
 
-    public static void addGuest() throws IllegalArgumentException, IndexOutOfBoundsException {
+    public static void addGuest() throws NumberFormatException, FirstNameFormatException, LastNameFormatException, PhoneNumberLengthException {
         System.out.println("First name: ");
         String firstName = sc.next();
         if (firstName.matches("[0-9]+")) {
-            throw new IllegalArgumentException("Prenumele nu poate fi format din cifre!");
+            throw new FirstNameFormatException ("Prenumele nu poate fi format din cifre!");
         }
         System.out.println("Last name: ");
         String lastName = sc.next();
         if (lastName.matches("[0-9]+")) {
-            throw new IllegalArgumentException("Numele nu poate fi format din cifre!");
+            throw new LastNameFormatException("Numele nu poate fi format din cifre!");
         }
         System.out.println("Enter email address (Pattern: name@gmail.com): ");
         String email = sc.next();
@@ -53,11 +54,11 @@ public class Main {
         System.out.println("Phone number: ");
         String phoneNumber = sc.next();
         if (!phoneNumber.matches("[0-9]+")) {
-            throw new IllegalArgumentException("Numarul de telefon trebuie sa fie format doar din cifre!");
+            throw new NumberFormatException("Numarul de telefon trebuie sa fie format doar din cifre!");
         }
 
         if (phoneNumber.length() != 10) {
-            throw new IndexOutOfBoundsException("Numarul de telefon contine exact 10 cifre!");
+            throw new PhoneNumberLengthException("Numarul de telefon contine exact 10 cifre!");
         }
         Guest guest = new Guest(firstName, lastName, email, phoneNumber);
         System.out.println("New guest:\n" + guest);
@@ -119,7 +120,7 @@ public class Main {
         try {
             options = sc.nextInt();
             if (options != 1 && options != 2 && options != 3) {
-                throw new IndexOutOfBoundsException("Introduceti una dintre optiunile : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
+                throw new InvalidChoiceException("Introduceti una dintre optiunile : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
             }
 
             switch (options) {
@@ -161,6 +162,8 @@ public class Main {
         } catch (InputMismatchException e) {
             System.err.println("Error, this was not a number!!!");
             sc.nextLine();
+        } catch (InvalidChoiceException e) {
+            e.printStackTrace();
         }
     }
 
@@ -172,7 +175,7 @@ public class Main {
         try {
             int option = sc.nextInt();
             if ((option != 1) && (option != 2) && (option != 3)) {
-                throw new IndexOutOfBoundsException("Ati introdus o alta valoare din intervalul [1-3]");
+                throw new InvalidChoiceException("Ati introdus o alta valoare din intervalul [1-3]");
             }
             switch (option) {
                 case 1:
@@ -191,7 +194,7 @@ public class Main {
 
                     //if the guest is not found we will stop the update!
                     if (!guestList.checkName(str1, str2)) {
-                        throw new NullPointerException("The guest searched doesn't exists");
+                        throw new NullPointerException("Participantul cautat nu exista in sistem!");
                     }
 
                     System.out.println("Enter the option desired to update:  1 (Update First Name) / 2 (Update Last Name) / 3(update e-mail) / 4 (update Phone Number");
@@ -206,7 +209,7 @@ public class Main {
                         guestList.updateHelper(str1, str2, null, null).setEmail(str3);
                     } else if (optionsI == 4) {
                         guestList.updateHelper(str1, str2, null, null).setPhoneNumber(str3);
-                    } else System.out.println("Invalid option!");
+                    } else throw new InvalidChoiceException("Invalid option!");
                     break;
 
                 case 2:
@@ -229,7 +232,7 @@ public class Main {
                         guestList.updateHelper(null, null, str4, null).setEmail(str5);
                     } else if (optionsII == 4) {
                         guestList.updateHelper(null, null, str5, null).setPhoneNumber(str5);
-                    } else System.out.println("Invalid option!");
+                    } else throw new InvalidChoiceException("Invalid option!");
                     break;
 
                 case 3:
@@ -253,13 +256,15 @@ public class Main {
                         guestList.updateHelper(null, null, null, str6).setEmail(str7);
                     } else if (optionsIV == 4) {
                         guestList.updateHelper(null, null, null, str6).setPhoneNumber(str7);
-                    } else System.out.println("Invalid option!");
+                    } else throw new InvalidChoiceException("Invalid option!");
                     break;
             }
         } catch (InputMismatchException e) {
             sc.nextLine();
             System.out.println("Trebuie sa introduceti una dintre valorile 1 / 2 / 3");
 
+        } catch (InvalidChoiceException e) {
+            e.printStackTrace();
         }
     }
 
@@ -298,7 +303,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NumberFormatException, LastNameFormatException, FirstNameFormatException, PhoneNumberLengthException {
 
         System.out.println("Welcome to the new Registration Management System! ");
         guestList = GuestList.readFromBinaryFile();
