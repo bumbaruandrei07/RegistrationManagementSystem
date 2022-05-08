@@ -272,10 +272,13 @@ public class GuestList implements Serializable {
     }
 
     public void reset() {
-        participantsList.clear();
-        waitingList.clear();
+        if(participantsList.size() > 0){
+            participantsList.clear();
+        }
+        if(waitingList.size() > 0){
+            waitingList.clear();
+        }
+
         System.out.println("Toate datele salvate in sistem au fost eliminate!");
     }
-
-
 }

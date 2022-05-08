@@ -106,7 +106,8 @@ public class Main {
     }
 
     private static void resetApp() {
-        guestList.reset();
+       guestList.getWaitingList().clear();
+       guestList.getParticipantsList().clear();
     }
 
 
