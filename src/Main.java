@@ -1,13 +1,10 @@
-
 import exceptions.*;
-import exceptions.NumberFormatException;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-
 
     private static final Scanner sc = new Scanner(System.in);
     private static GuestList guestList = new GuestList(1);
@@ -35,7 +32,7 @@ public class Main {
         System.out.println("quit         - Inchide aplicatia");
     }
 
-    public static void addGuest() throws NumberFormatException, FirstNameFormatException, LastNameFormatException, PhoneNumberLengthException {
+    public static void addGuest() throws java.lang.NumberFormatException, FirstNameFormatException, LastNameFormatException, PhoneNumberLengthException {
         System.out.println("First name: ");
         String firstName = sc.next();
         if (firstName.matches("[0-9]+")) {
@@ -54,7 +51,7 @@ public class Main {
         System.out.println("Phone number: ");
         String phoneNumber = sc.next();
         if (!phoneNumber.matches("[0-9]+")) {
-            throw new NumberFormatException("Numarul de telefon trebuie sa fie format doar din cifre!");
+            throw new java.lang.NumberFormatException("Numarul de telefon trebuie sa fie format doar din cifre!");
         }
 
         if (phoneNumber.length() != 10) {
@@ -111,8 +108,7 @@ public class Main {
        guestList.getParticipantsList().clear();
     }
 
-
-    private static void remove() throws IndexOutOfBoundsException, NullPointerException, InputMismatchException {
+    private static void remove() throws NullPointerException, InputMismatchException {
         int options;
         String s1, s2;
         System.out.println("S-a ales optiunea de stergere a unui participant.");
@@ -167,11 +163,9 @@ public class Main {
         }
     }
 
-    private static void update() {
-
+    private static void update() throws NullPointerException, InputMismatchException {
         System.out.println("Actualizeaza detaliile unei participant: ");
         System.out.println("Introduceti una dintre optiunile de cautare a participantului : 1 (Cautare dupa First Name & Last Name / 2 (E-mail) / 3 (Phone number)");
-
         try {
             int option = sc.nextInt();
             if ((option != 1) && (option != 2) && (option != 3)) {
@@ -268,13 +262,13 @@ public class Main {
         }
     }
 
-    private static void check() {
+    private static void check() throws InvalidChoiceException {
         String option, s1, s2;
         System.out.println("Verifica daca o persoana este inscrisa la eveniment: ");
         System.out.println("Introduceti una dintre optiunile : A (Cautare dupa First Name & Last Name / B (E-mail) / C (Phone number)");
         option = sc.next();
         if (!option.equals("A") && (!option.equals("B")) && (!option.equals("C"))) {
-            throw new IllegalArgumentException("Trebuie sa introduceti A, B sau C");
+            throw new InvalidChoiceException("Trebuie sa introduceti A, B sau C");
         }
         switch (option) {
             case "A":
@@ -303,7 +297,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException, NumberFormatException, LastNameFormatException, FirstNameFormatException, PhoneNumberLengthException {
+    public static void main(String[] args) throws IOException, NumberFormatException, LastNameFormatException, FirstNameFormatException, PhoneNumberLengthException, InvalidChoiceException {
 
         System.out.println("Welcome to the new Registration Management System! ");
         guestList = GuestList.readFromBinaryFile();

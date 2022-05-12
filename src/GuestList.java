@@ -17,7 +17,7 @@ public class GuestList implements Serializable {
         this.waitingList = new ArrayList<>();
     }
 
-    //add a new guest method used in main (entry-point of our app)
+    //add a new guest method used in main
     public int addParticipant(Guest guest) {
         if (isRegistered(guest)) {
             System.out.println("This user is already registered");
@@ -270,15 +270,4 @@ public class GuestList implements Serializable {
         }
         System.out.println("Reset done!");
     }
-
-//    public void reset() {
-//        if(participantsList.size() > 0){
-//            participantsList.clear();
-//        }
-//        if(waitingList.size() > 0){
-//            waitingList.clear();
-//        }
-//
-//        System.out.println("Toate datele salvate in sistem au fost eliminate!");
-//    }
 }
