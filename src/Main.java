@@ -104,8 +104,8 @@ public class Main {
     }
 
     private static void resetApp() {
-       guestList.getWaitingList().clear();
        guestList.getParticipantsList().clear();
+        guestList.getWaitingList().clear();
     }
 
     private static void remove() throws NullPointerException, InputMismatchException {
